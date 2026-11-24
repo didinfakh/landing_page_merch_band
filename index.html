@@ -54,12 +54,12 @@ body{background:var(--paper);color:var(--ink);font-family:'Space Grotesk',system
           <span class="text-xs uppercase font-bold tracking-widest text-mute block mb-1">Katalog Produk</span>
           <h2 class="text-2xl sm:text-3xl font-bold">Koleksi Tersedia</h2>
         </div>
-        <div class="inline-flex items-center gap-2 border border-line px-3 py-1.5 text-xs font-medium">
+        <div id="catalog-badge" class="inline-flex items-center gap-2 border border-line px-3 py-1.5 text-xs font-medium">
           <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-          1 Item FOR SALE
+          2 Item FOR SALE
         </div>
       </div>
-      <div id="grid"></div>
+      <div id="grid" class="grid grid-cols-1 md:grid-cols-2 gap-8"></div>
     </div>
   </section>
 
@@ -99,101 +99,127 @@ body{background:var(--paper);color:var(--ink);font-family:'Space Grotesk',system
 const WA = '6281234567890';
 const IG = 'https://instagram.com/merchbandmadiun';
 
-const item = {
-  band: 'Jenny & FSTVLST',
-  title: 'Official Merch: Jenny & FSTVLST - "Objek Vital Nasional" (OVN)',
-  badge: 'FOR SALE',
-  size: 'XL',
-  kondisi: 'Mulus, no minus',
-  harga: 'DM / Chat WA (link di bio)',
-  deskripsi: 'Siapa cepat dia dapat, stok cuma satu. Silakan masuk dan berbahagia bersama!',
-  images: [
-    { label: 'Tampak Depan', src: 'ovn/ovn%20depan.png' },
-    { label: 'Tampak Belakang', src: 'ovn/ovn%20belakang.png' }
-  ],
-  sold: false
-};
+const items = [
+  {
+    id: 'ovn',
+    band: 'Jenny & FSTVLST',
+    title: 'Official Merch: Jenny & FSTVLST - "Objek Vital Nasional" (OVN)',
+    badge: 'FOR SALE',
+    size: 'XL',
+    kondisi: 'Mulus, no minus',
+    harga: 'DM / Chat WA (link di bio)',
+    deskripsi: 'Siapa cepat dia dapat, stok cuma satu. Silakan masuk dan berbahagia bersama!',
+    images: [
+      { label: 'Tampak Depan', src: 'ovn/ovn%20depan.png' },
+      { label: 'Tampak Belakang', src: 'ovn/ovn%20belakang.png' }
+    ],
+    sold: false
+  },
+  {
+    id: 'the_sigit',
+    band: 'The S.I.G.I.T.',
+    title: 'Official Merch: The S.I.G.I.T. - "Visible Idea of Perfection"',
+    badge: 'FOR SALE',
+    size: 'XL',
+    kondisi: 'Mulus, no minus',
+    harga: 'DM / Chat WA (link di bio)',
+    deskripsi: 'Siapa cepat dia dapat, stok cuma satu. Minat langsung bungkus!',
+    images: [
+      { label: 'Tampak Depan', src: 'the_sigit/the%20sigit.png' }
+    ],
+    sold: false
+  }
+];
 
 const grid = document.getElementById('grid');
 
-function renderItem() {
-  const msg = encodeURIComponent(`Halo Merch Band Madiun, saya mau tanya/order ${item.title} (Size ${item.size}). Apakah masih ada?`);
-  const btn = item.sold
-    ? `<span class="mt-4 text-center border border-line text-mute px-6 py-3 font-medium w-full block">Terjual</span>`
-    : `<div class="flex flex-col sm:flex-row gap-3 mt-6">
-        <a href="https://wa.me/${WA}?text=${msg}" target="_blank" rel="noopener" class="bg-ink text-paper text-center font-medium px-5 py-3 flex-1 flex items-center justify-center gap-2 hover:opacity-90">
-          Pesan via WA
-        </a>
-        <a href="${IG}" target="_blank" rel="noopener" class="border border-line text-center font-medium px-5 py-3 hover:border-ink">
-          DM Instagram
-        </a>
-      </div>`;
+function renderItems() {
+  grid.innerHTML = items.map(item => {
+    const msg = encodeURIComponent(`Halo Merch Band Madiun, saya mau tanya/order ${item.title} (Size ${item.size}). Apakah masih ada?`);
+    const actionButtons = item.sold
+      ? `<span class="mt-4 text-center border border-line text-mute px-6 py-3 font-medium w-full block">Terjual</span>`
+      : `<div class="flex flex-col sm:flex-row gap-3 mt-6">
+          <a href="https://wa.me/${WA}?text=${msg}" target="_blank" rel="noopener" class="bg-ink text-paper text-center font-medium px-4 py-2.5 flex-1 flex items-center justify-center gap-2 hover:opacity-90">
+            Pesan via WA
+          </a>
+          <a href="${IG}" target="_blank" rel="noopener" class="border border-line text-center font-medium px-4 py-2.5 hover:border-ink">
+            DM IG
+          </a>
+        </div>`;
 
-  grid.innerHTML = `
-    <article class="border border-line max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 bg-paper">
-      <!-- Sisi Gambar & Galeri -->
-      <div class="p-6 bg-card flex flex-col items-center justify-center border-b md:border-b-0 md:border-r border-line">
+    const imageGallery = `
+      <div class="p-6 bg-card border-b border-line flex flex-col items-center justify-center">
         <div class="w-full aspect-square flex items-center justify-center overflow-hidden">
-          <img id="main-product-img" src="${item.images[0].src}" alt="${item.title}" class="max-h-full max-w-full object-contain transition-all duration-200">
+          <img id="img-${item.id}" src="${item.images[0].src}" alt="${item.title}" class="max-h-full max-w-full object-contain transition-all duration-200">
         </div>
-        <div class="mt-4 flex gap-3 w-full justify-center">
-          <button type="button" onclick="switchImage('${item.images[0].src}', this)" class="thumb-btn border-2 border-ink bg-paper px-3 py-1.5 flex items-center gap-2 text-xs font-semibold cursor-pointer">
-            <img src="${item.images[0].src}" class="w-6 h-6 object-contain" alt="Thumbnail Depan">
-            <span>Tampak Depan</span>
-          </button>
-          <button type="button" onclick="switchImage('${item.images[1].src}', this)" class="thumb-btn border border-line bg-paper px-3 py-1.5 flex items-center gap-2 text-xs font-semibold cursor-pointer opacity-70 hover:opacity-100">
-            <img src="${item.images[1].src}" class="w-6 h-6 object-contain" alt="Thumbnail Belakang">
-            <span>Tampak Belakang</span>
-          </button>
-        </div>
+        ${item.images.length > 1 ? `
+          <div class="mt-4 flex gap-2 w-full justify-center">
+            ${item.images.map((img, idx) => `
+              <button type="button" onclick="switchImage('${item.id}', '${img.src}', this)" class="thumb-btn-${item.id} ${idx === 0 ? 'border-2 border-ink' : 'border border-line opacity-70 hover:opacity-100'} bg-paper px-3 py-1.5 flex items-center gap-1.5 text-xs font-semibold cursor-pointer">
+                <img src="${img.src}" class="w-5 h-5 object-contain" alt="${img.label}">
+                <span>${img.label}</span>
+              </button>
+            `).join('')}
+          </div>
+        ` : `
+          <div class="mt-4 flex justify-center">
+            <span class="text-xs text-mute font-medium border border-line bg-paper px-3 py-1.5">Tampak Depan</span>
+          </div>
+        `}
       </div>
+    `;
 
-      <!-- Sisi Informasi & Detail Produk -->
-      <div class="p-6 md:p-8 flex flex-col justify-between">
+    return `
+      <article class="border border-line bg-paper flex flex-col justify-between">
         <div>
-          <div class="flex items-center gap-2 mb-3">
-            <span class="bg-ink text-paper text-xs uppercase tracking-wider font-bold px-2.5 py-1">${item.badge}</span>
-            <span class="text-xs text-mute font-medium border border-line px-2 py-1">Stok: 1 Pcs</span>
-          </div>
-          <h3 class="text-xl md:text-2xl font-bold leading-snug">${item.title}</h3>
-          
-          <div class="mt-5 space-y-2.5 border-t border-b border-line py-4 text-sm">
-            <div class="flex justify-between">
-              <span class="text-mute">Band / Artist</span>
-              <span class="font-medium">${item.band}</span>
+          ${imageGallery}
+          <div class="p-6 md:p-7">
+            <div class="flex items-center gap-2 mb-3">
+              <span class="bg-ink text-paper text-xs uppercase tracking-wider font-bold px-2.5 py-1">${item.badge}</span>
+              <span class="text-xs text-mute font-medium border border-line px-2 py-1">Stok: 1 Pcs</span>
             </div>
-            <div class="flex justify-between">
-              <span class="text-mute">Size</span>
-              <span class="font-bold">${item.size}</span>
-            </div>
-            <div class="flex justify-between">
-              <span class="text-mute">Kondisi</span>
-              <span class="font-medium text-emerald-600 dark:text-emerald-400">${item.kondisi}</span>
-            </div>
-          </div>
+            <h3 class="text-lg md:text-xl font-bold leading-snug min-h-[3rem]">${item.title}</h3>
 
-          <div class="mt-4 bg-card p-4 border border-line">
-            <span class="text-xs text-mute block font-medium uppercase tracking-wider">Harga</span>
-            <span class="text-xl font-bold text-ink">${item.harga}</span>
-          </div>
+            <div class="mt-4 space-y-2 border-t border-b border-line py-3 text-sm">
+              <div class="flex justify-between">
+                <span class="text-mute">Band / Artist</span>
+                <span class="font-medium">${item.band}</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-mute">Size</span>
+                <span class="font-bold">${item.size}</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-mute">Kondisi</span>
+                <span class="font-medium text-emerald-600 dark:text-emerald-400">${item.kondisi}</span>
+              </div>
+            </div>
 
-          <p class="mt-4 text-sm text-mute italic border-l-2 border-ink pl-3 py-1">
-            “${item.deskripsi}”
-          </p>
+            <div class="mt-4 bg-card p-3.5 border border-line">
+              <span class="text-xs text-mute block font-medium uppercase tracking-wider">Harga</span>
+              <span class="text-lg font-bold text-ink">${item.harga}</span>
+            </div>
+
+            <p class="mt-4 text-sm text-mute italic border-l-2 border-ink pl-3 py-1">
+              “${item.deskripsi}”
+            </p>
+          </div>
         </div>
 
-        ${btn}
-      </div>
-    </article>
-  `;
+        <div class="p-6 pt-0 md:p-7 md:pt-0">
+          ${actionButtons}
+        </div>
+      </article>
+    `;
+  }).join('');
 }
 
-function switchImage(src, btn) {
-  const mainImg = document.getElementById('main-product-img');
-  if (mainImg) {
-    mainImg.src = src;
+function switchImage(itemId, src, btn) {
+  const targetImg = document.getElementById(`img-${itemId}`);
+  if (targetImg) {
+    targetImg.src = src;
   }
-  document.querySelectorAll('.thumb-btn').forEach(b => {
+  document.querySelectorAll(`.thumb-btn-${itemId}`).forEach(b => {
     b.classList.remove('border-2', 'border-ink');
     b.classList.add('border', 'border-line', 'opacity-70');
   });
@@ -201,7 +227,7 @@ function switchImage(src, btn) {
   btn.classList.add('border-2', 'border-ink');
 }
 
-renderItem();
+renderItems();
 </script>
 </body>
 </html>
