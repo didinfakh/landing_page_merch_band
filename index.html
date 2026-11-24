@@ -50,11 +50,16 @@ body{background:var(--paper);color:var(--ink);font-family:'Space Grotesk',system
   <section id="katalog" class="border-t border-line">
     <div class="max-w-6xl mx-auto px-4 py-12">
       <div class="flex flex-wrap items-end justify-between gap-4 mb-8">
-        <h2 class="text-2xl sm:text-3xl font-bold">Katalog</h2>
-        <div id="filters" class="flex flex-wrap gap-2" role="group" aria-label="Filter genre"></div>
+        <div>
+          <span class="text-xs uppercase font-bold tracking-widest text-mute block mb-1">Katalog Produk</span>
+          <h2 class="text-2xl sm:text-3xl font-bold">Koleksi Tersedia</h2>
+        </div>
+        <div class="inline-flex items-center gap-2 border border-line px-3 py-1.5 text-xs font-medium">
+          <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+          1 Item FOR SALE
+        </div>
       </div>
-      <div id="grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"></div>
-      <p class="mt-8 text-sm text-mute">Ukuran dalam cm, diukur datar: lebar dada (ketiak ke ketiak) x panjang. Beda sedikit dari label karena kaos second.</p>
+      <div id="grid"></div>
     </div>
   </section>
 
@@ -76,7 +81,7 @@ body{background:var(--paper);color:var(--ink);font-family:'Space Grotesk',system
         <p class="mt-2 text-mute max-w-xl">Kirim foto atau nama bandnya lewat DM atau WA. Kami bantu cari atau beli.</p>
       </div>
       <div class="flex flex-wrap gap-3">
-        <a href="https://instagram.com/merchbandmadiun" target="_blank" rel="noopener" class="border border-ink px-6 py-3 font-medium">Follow Instagram</a>
+        <a href="https://instagram.com/merchbandmadiun" target="_blank" rel="noopener" class="border border-line px-6 py-3 font-medium">Follow Instagram</a>
         <a href="https://wa.me/6281234567890?text=Halo%2C%20saya%20mau%20jual%20atau%20cari%20kaos%20band." target="_blank" rel="noopener" class="bg-ink text-paper px-6 py-3 font-medium">Chat WhatsApp</a>
       </div>
     </div>
@@ -92,52 +97,111 @@ body{background:var(--paper);color:var(--ink);font-family:'Space Grotesk',system
 
 <script>
 const WA = '6281234567890';
-// Ganti isi daftar ini dengan stok asli. sold:true untuk menandai terjual.
-const items = [
-  { band:'Metallica',      n:'Metallica – Master of Puppets', g:'Metal',  era:'Reprint 2000-an', kond:'8/10', size:'L',  dim:'55 x 72', c:'#151515', t:'#f2f2f2', w:'METALLICA', p:185000 },
-  { band:'Nirvana',        n:'Nirvana – In Utero',            g:'Grunge', era:'Original 1990-an', kond:'7/10', size:'XL', dim:'58 x 74', c:'#e8e8e8', t:'#151515', w:'NIRVANA',   p:350000 },
-  { band:'Slipknot',       n:'Slipknot – Iowa Tour',          g:'Metal',  era:'2000-an',         kond:'8/10', size:'L',  dim:'54 x 71', c:'#1c1c1c', t:'#f2f2f2', w:'SLIPKNOT',  p:165000 },
-  { band:'Green Day',      n:'Green Day – American Idiot',    g:'Punk',   era:'2000-an',         kond:'9/10', size:'M',  dim:'51 x 69', c:'#2a2a2a', t:'#f2f2f2', w:'GREEN DAY', p:150000, sold:true },
-  { band:'The Ramones',    n:'Ramones – Presidential Seal',   g:'Punk',   era:'Reprint',         kond:'8/10', size:'M',  dim:'52 x 70', c:'#111111', t:'#f2f2f2', w:'RAMONES',   p:140000 },
-  { band:'Pink Floyd',     n:'Pink Floyd – Dark Side',        g:'Rock',   era:'Reprint',         kond:'8/10', size:'L',  dim:'55 x 71', c:'#0d0d0d', t:'#f2f2f2', w:'PINK FLOYD',p:160000 },
-  { band:'Sepultura',      n:'Sepultura – Roots',             g:'Metal',  era:'Vintage 1990-an', kond:'7/10', size:'XL', dim:'59 x 75', c:'#1a1a1a', t:'#f2f2f2', w:'SEPULTURA', p:275000 },
-  { band:'Led Zeppelin',   n:'Led Zeppelin – Tour 1977',      g:'Rock',   era:'Reprint',         kond:'9/10', size:'M',  dim:'52 x 69', c:'#7d7d7d', t:'#ffffff', w:'LED ZEPP.', p:150000 }
-];
-const rp = n => 'Rp ' + n.toLocaleString('id-ID');
-const tee = it => `
-<svg viewBox="0 0 200 200" class="w-full h-auto" role="img" aria-label="Ilustrasi kaos ${it.n}">
-  <path d="M65 18 L18 42 L34 82 L54 74 L54 182 L146 182 L146 74 L166 82 L182 42 L135 18 Q100 40 65 18Z" fill="${it.c}" stroke="#8a8a8a" stroke-width="2" stroke-linejoin="round"/>
-  <text x="100" y="120" text-anchor="middle" font-family="'Space Grotesk',sans-serif" font-weight="700" font-size="${it.w.length>8?15:19}" fill="${it.t}">${it.w}</text>
-</svg>`;
+const IG = 'https://instagram.com/merchbandmadiun';
+
+const item = {
+  band: 'Jenny & FSTVLST',
+  title: 'Official Merch: Jenny & FSTVLST - "Objek Vital Nasional" (OVN)',
+  badge: 'FOR SALE',
+  size: 'XL',
+  kondisi: 'Mulus, no minus',
+  harga: 'DM / Chat WA (link di bio)',
+  deskripsi: 'Siapa cepat dia dapat, stok cuma satu. Silakan masuk dan berbahagia bersama!',
+  images: [
+    { label: 'Tampak Depan', src: 'ovn/ovn%20depan.png' },
+    { label: 'Tampak Belakang', src: 'ovn/ovn%20belakang.png' }
+  ],
+  sold: false
+};
 
 const grid = document.getElementById('grid');
-function render(f){
-  const list = f==='Semua' ? items : items.filter(i=>i.g===f);
-  grid.innerHTML = list.map(it => {
-    const msg = encodeURIComponent(`Halo Merch Band Madiun, saya mau tanya kaos "${it.n}" (ukuran ${it.size}). Masih ada?`);
-    const btn = it.sold
-      ? `<span class="mt-4 text-center border border-line text-mute px-4 py-2 font-medium">Terjual</span>`
-      : `<a href="https://wa.me/${WA}?text=${msg}" target="_blank" rel="noopener" class="mt-4 text-center bg-ink text-paper font-medium px-4 py-2">Pesan via WA</a>`;
-    return `<article class="border border-line flex flex-col ${it.sold?'opacity-70':''}">
-      <div class="p-4 bg-card">${tee(it)}</div>
-      <div class="p-4 flex flex-col gap-1 grow">
-        <span class="text-sm text-mute">${it.g}, ${it.era}</span>
-        <h3 class="font-bold leading-snug">${it.n}</h3>
-        <p class="text-sm text-mute">Ukuran ${it.size} (${it.dim} cm), kondisi ${it.kond}</p>
-        <p class="text-xl font-bold mt-1">${rp(it.p)}</p>
+
+function renderItem() {
+  const msg = encodeURIComponent(`Halo Merch Band Madiun, saya mau tanya/order ${item.title} (Size ${item.size}). Apakah masih ada?`);
+  const btn = item.sold
+    ? `<span class="mt-4 text-center border border-line text-mute px-6 py-3 font-medium w-full block">Terjual</span>`
+    : `<div class="flex flex-col sm:flex-row gap-3 mt-6">
+        <a href="https://wa.me/${WA}?text=${msg}" target="_blank" rel="noopener" class="bg-ink text-paper text-center font-medium px-5 py-3 flex-1 flex items-center justify-center gap-2 hover:opacity-90">
+          Pesan via WA
+        </a>
+        <a href="${IG}" target="_blank" rel="noopener" class="border border-line text-center font-medium px-5 py-3 hover:border-ink">
+          DM Instagram
+        </a>
+      </div>`;
+
+  grid.innerHTML = `
+    <article class="border border-line max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 bg-paper">
+      <!-- Sisi Gambar & Galeri -->
+      <div class="p-6 bg-card flex flex-col items-center justify-center border-b md:border-b-0 md:border-r border-line">
+        <div class="w-full aspect-square flex items-center justify-center overflow-hidden">
+          <img id="main-product-img" src="${item.images[0].src}" alt="${item.title}" class="max-h-full max-w-full object-contain transition-all duration-200">
+        </div>
+        <div class="mt-4 flex gap-3 w-full justify-center">
+          <button type="button" onclick="switchImage('${item.images[0].src}', this)" class="thumb-btn border-2 border-ink bg-paper px-3 py-1.5 flex items-center gap-2 text-xs font-semibold cursor-pointer">
+            <img src="${item.images[0].src}" class="w-6 h-6 object-contain" alt="Thumbnail Depan">
+            <span>Tampak Depan</span>
+          </button>
+          <button type="button" onclick="switchImage('${item.images[1].src}', this)" class="thumb-btn border border-line bg-paper px-3 py-1.5 flex items-center gap-2 text-xs font-semibold cursor-pointer opacity-70 hover:opacity-100">
+            <img src="${item.images[1].src}" class="w-6 h-6 object-contain" alt="Thumbnail Belakang">
+            <span>Tampak Belakang</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Sisi Informasi & Detail Produk -->
+      <div class="p-6 md:p-8 flex flex-col justify-between">
+        <div>
+          <div class="flex items-center gap-2 mb-3">
+            <span class="bg-ink text-paper text-xs uppercase tracking-wider font-bold px-2.5 py-1">${item.badge}</span>
+            <span class="text-xs text-mute font-medium border border-line px-2 py-1">Stok: 1 Pcs</span>
+          </div>
+          <h3 class="text-xl md:text-2xl font-bold leading-snug">${item.title}</h3>
+          
+          <div class="mt-5 space-y-2.5 border-t border-b border-line py-4 text-sm">
+            <div class="flex justify-between">
+              <span class="text-mute">Band / Artist</span>
+              <span class="font-medium">${item.band}</span>
+            </div>
+            <div class="flex justify-between">
+              <span class="text-mute">Size</span>
+              <span class="font-bold">${item.size}</span>
+            </div>
+            <div class="flex justify-between">
+              <span class="text-mute">Kondisi</span>
+              <span class="font-medium text-emerald-600 dark:text-emerald-400">${item.kondisi}</span>
+            </div>
+          </div>
+
+          <div class="mt-4 bg-card p-4 border border-line">
+            <span class="text-xs text-mute block font-medium uppercase tracking-wider">Harga</span>
+            <span class="text-xl font-bold text-ink">${item.harga}</span>
+          </div>
+
+          <p class="mt-4 text-sm text-mute italic border-l-2 border-ink pl-3 py-1">
+            “${item.deskripsi}”
+          </p>
+        </div>
+
         ${btn}
-      </div></article>`;
-  }).join('');
+      </div>
+    </article>
+  `;
 }
-const filters = ['Semua','Metal','Punk','Rock','Grunge'];
-const fbox = document.getElementById('filters');
-fbox.innerHTML = filters.map((f,i)=>`<button type="button" data-f="${f}" aria-pressed="${i===0}" class="chip border border-line px-4 py-1.5 text-sm font-medium">${f}</button>`).join('');
-fbox.addEventListener('click', e => {
-  const b = e.target.closest('button'); if(!b) return;
-  fbox.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed', x===b));
-  render(b.dataset.f);
-});
-render('Semua');
+
+function switchImage(src, btn) {
+  const mainImg = document.getElementById('main-product-img');
+  if (mainImg) {
+    mainImg.src = src;
+  }
+  document.querySelectorAll('.thumb-btn').forEach(b => {
+    b.classList.remove('border-2', 'border-ink');
+    b.classList.add('border', 'border-line', 'opacity-70');
+  });
+  btn.classList.remove('border-line', 'opacity-70');
+  btn.classList.add('border-2', 'border-ink');
+}
+
+renderItem();
 </script>
 </body>
 </html>
