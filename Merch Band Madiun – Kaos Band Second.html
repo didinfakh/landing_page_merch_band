@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Merch Band Madiun – Kaos Band Second</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com/3.4.17"></script>
+<script>
+tailwind.config = { theme: { extend: {
+  fontFamily: { body: ['"Space Grotesk"','system-ui','sans-serif'] },
+  colors: { paper:'var(--paper)', ink:'var(--ink)', mute:'var(--mute)', line:'var(--line)', card:'var(--card)' }
+}}};
+</script>
+<style>
+:root{--paper:#ffffff;--ink:#111111;--mute:#6b6b6b;--line:#d9d9d9;--card:#f3f3f3;color-scheme:light;
+  box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--paper:#111111;--ink:#f2f2f2;--mute:#9a9a9a;--line:#333333;--card:#1c1c1c;color-scheme:dark}}
+:root[data-theme="dark"]{--paper:#111111;--ink:#f2f2f2;--mute:#9a9a9a;--line:#333333;--card:#1c1c1c;color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+body{background:var(--paper);color:var(--ink);font-family:'Space Grotesk',system-ui,sans-serif}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<header class="border-b border-line">
+  <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between gap-3">
+    <a href="#atas" class="font-bold text-lg">Merch Band Madiun</a>
+    <nav class="flex items-center gap-2 text-sm">
+      <a href="https://instagram.com/merchbandmadiun" target="_blank" rel="noopener" class="border border-line px-3 py-2 font-medium hover:border-ink">Instagram</a>
+      <a href="https://wa.me/6281234567890" target="_blank" rel="noopener" class="bg-ink text-paper px-3 py-2 font-medium">WhatsApp</a>
+    </nav>
+  </div>
+</header>
+
+<main id="atas">
+  <section class="max-w-6xl mx-auto px-4 pt-14 pb-10">
+    <h1 class="text-4xl sm:text-6xl font-bold leading-tight max-w-3xl">Kaos band second, dari berbagai band dan era.</h1>
+    <p class="mt-5 text-lg text-mute max-w-xl">Setiap kaos hanya ada satu. Kondisi dan ukuran asli dicantumkan, jadi kamu tahu persis barang yang kamu beli.</p>
+    <div class="mt-7 flex flex-wrap gap-3">
+      <a href="#katalog" class="bg-ink text-paper font-medium px-6 py-3">Lihat katalog</a>
+      <a href="https://wa.me/6281234567890?text=Halo%20Merch%20Band%20Madiun%2C%20saya%20mau%20tanya%20stok%20kaos." target="_blank" rel="noopener" class="border border-ink font-medium px-6 py-3">Tanya stok via WA</a>
+    </div>
+  </section>
+
+  <section id="katalog" class="border-t border-line">
+    <div class="max-w-6xl mx-auto px-4 py-12">
+      <div class="flex flex-wrap items-end justify-between gap-4 mb-8">
+        <h2 class="text-2xl sm:text-3xl font-bold">Katalog</h2>
+        <div id="filters" class="flex flex-wrap gap-2" role="group" aria-label="Filter genre"></div>
+      </div>
+      <div id="grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"></div>
+      <p class="mt-8 text-sm text-mute">Ukuran dalam cm, diukur datar: lebar dada (ketiak ke ketiak) x panjang. Beda sedikit dari label karena kaos second.</p>
+    </div>
+  </section>
+
+  <section id="cara-pesan" class="border-t border-line">
+    <div class="max-w-6xl mx-auto px-4 py-12">
+      <h2 class="text-2xl sm:text-3xl font-bold mb-8">Cara pesan</h2>
+      <ol class="grid md:grid-cols-3 gap-6">
+        <li><b class="block mb-1">1. Pilih kaos</b><span class="text-mute">Klik “Pesan via WA” di kaos yang kamu mau. Pesan otomatis terisi nama kaosnya.</span></li>
+        <li><b class="block mb-1">2. Konfirmasi</b><span class="text-mute">Kami cek ketersediaan, kirim foto detail tambahan, dan hitung ongkir ke alamatmu.</span></li>
+        <li><b class="block mb-1">3. Transfer dan kirim</b><span class="text-mute">Setelah transfer, kaos dikirim 1–2 hari kerja. COD tersedia di area Madiun kota.</span></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="border-t border-line bg-card">
+    <div class="max-w-6xl mx-auto px-4 py-12 flex flex-wrap items-center justify-between gap-6">
+      <div>
+        <h2 class="text-2xl font-bold">Punya kaos band untuk dijual atau dicari?</h2>
+        <p class="mt-2 text-mute max-w-xl">Kirim foto atau nama bandnya lewat DM atau WA. Kami bantu cari atau beli.</p>
+      </div>
+      <div class="flex flex-wrap gap-3">
+        <a href="https://instagram.com/merchbandmadiun" target="_blank" rel="noopener" class="border border-ink px-6 py-3 font-medium">Follow Instagram</a>
+        <a href="https://wa.me/6281234567890?text=Halo%2C%20saya%20mau%20jual%20atau%20cari%20kaos%20band." target="_blank" rel="noopener" class="bg-ink text-paper px-6 py-3 font-medium">Chat WhatsApp</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="border-t border-line">
+  <div class="max-w-6xl mx-auto px-4 py-8 text-sm text-mute flex flex-wrap justify-between gap-2">
+    <span>© 2026 Merch Band Madiun. Madiun, Jawa Timur.</span>
+    <span>@merchbandmadiun, 0812-3456-7890</span>
+  </div>
+</footer>
+
+<script>
+const WA = '6281234567890';
+// Ganti isi daftar ini dengan stok asli. sold:true untuk menandai terjual.
+const items = [
+  { band:'Metallica',      n:'Metallica – Master of Puppets', g:'Metal',  era:'Reprint 2000-an', kond:'8/10', size:'L',  dim:'55 x 72', c:'#151515', t:'#f2f2f2', w:'METALLICA', p:185000 },
+  { band:'Nirvana',        n:'Nirvana – In Utero',            g:'Grunge', era:'Original 1990-an', kond:'7/10', size:'XL', dim:'58 x 74', c:'#e8e8e8', t:'#151515', w:'NIRVANA',   p:350000 },
+  { band:'Slipknot',       n:'Slipknot – Iowa Tour',          g:'Metal',  era:'2000-an',         kond:'8/10', size:'L',  dim:'54 x 71', c:'#1c1c1c', t:'#f2f2f2', w:'SLIPKNOT',  p:165000 },
+  { band:'Green Day',      n:'Green Day – American Idiot',    g:'Punk',   era:'2000-an',         kond:'9/10', size:'M',  dim:'51 x 69', c:'#2a2a2a', t:'#f2f2f2', w:'GREEN DAY', p:150000, sold:true },
+  { band:'The Ramones',    n:'Ramones – Presidential Seal',   g:'Punk',   era:'Reprint',         kond:'8/10', size:'M',  dim:'52 x 70', c:'#111111', t:'#f2f2f2', w:'RAMONES',   p:140000 },
+  { band:'Pink Floyd',     n:'Pink Floyd – Dark Side',        g:'Rock',   era:'Reprint',         kond:'8/10', size:'L',  dim:'55 x 71', c:'#0d0d0d', t:'#f2f2f2', w:'PINK FLOYD',p:160000 },
+  { band:'Sepultura',      n:'Sepultura – Roots',             g:'Metal',  era:'Vintage 1990-an', kond:'7/10', size:'XL', dim:'59 x 75', c:'#1a1a1a', t:'#f2f2f2', w:'SEPULTURA', p:275000 },
+  { band:'Led Zeppelin',   n:'Led Zeppelin – Tour 1977',      g:'Rock',   era:'Reprint',         kond:'9/10', size:'M',  dim:'52 x 69', c:'#7d7d7d', t:'#ffffff', w:'LED ZEPP.', p:150000 }
+];
+const rp = n => 'Rp ' + n.toLocaleString('id-ID');
+const tee = it => `
+<svg viewBox="0 0 200 200" class="w-full h-auto" role="img" aria-label="Ilustrasi kaos ${it.n}">
+  <path d="M65 18 L18 42 L34 82 L54 74 L54 182 L146 182 L146 74 L166 82 L182 42 L135 18 Q100 40 65 18Z" fill="${it.c}" stroke="#8a8a8a" stroke-width="2" stroke-linejoin="round"/>
+  <text x="100" y="120" text-anchor="middle" font-family="'Space Grotesk',sans-serif" font-weight="700" font-size="${it.w.length>8?15:19}" fill="${it.t}">${it.w}</text>
+</svg>`;
+
+const grid = document.getElementById('grid');
+function render(f){
+  const list = f==='Semua' ? items : items.filter(i=>i.g===f);
+  grid.innerHTML = list.map(it => {
+    const msg = encodeURIComponent(`Halo Merch Band Madiun, saya mau tanya kaos "${it.n}" (ukuran ${it.size}). Masih ada?`);
+    const btn = it.sold
+      ? `<span class="mt-4 text-center border border-line text-mute px-4 py-2 font-medium">Terjual</span>`
+      : `<a href="https://wa.me/${WA}?text=${msg}" target="_blank" rel="noopener" class="mt-4 text-center bg-ink text-paper font-medium px-4 py-2">Pesan via WA</a>`;
+    return `<article class="border border-line flex flex-col ${it.sold?'opacity-70':''}">
+      <div class="p-4 bg-card">${tee(it)}</div>
+      <div class="p-4 flex flex-col gap-1 grow">
+        <span class="text-sm text-mute">${it.g}, ${it.era}</span>
+        <h3 class="font-bold leading-snug">${it.n}</h3>
+        <p class="text-sm text-mute">Ukuran ${it.size} (${it.dim} cm), kondisi ${it.kond}</p>
+        <p class="text-xl font-bold mt-1">${rp(it.p)}</p>
+        ${btn}
+      </div></article>`;
+  }).join('');
+}
+const filters = ['Semua','Metal','Punk','Rock','Grunge'];
+const fbox = document.getElementById('filters');
+fbox.innerHTML = filters.map((f,i)=>`<button type="button" data-f="${f}" aria-pressed="${i===0}" class="chip border border-line px-4 py-1.5 text-sm font-medium">${f}</button>`).join('');
+fbox.addEventListener('click', e => {
+  const b = e.target.closest('button'); if(!b) return;
+  fbox.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed', x===b));
+  render(b.dataset.f);
+});
+render('Semua');
+</script>
+</body>
+</html>
